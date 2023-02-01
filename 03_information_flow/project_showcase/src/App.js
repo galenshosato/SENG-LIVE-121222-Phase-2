@@ -6,6 +6,16 @@ import ProjectList from "./components/ProjectList";
 
 const App = () => {
   const [projects, setProjects] = useState([]);
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const classMode = isDarkMode ? 'App' : 'App light'
+
+  function handleClick(event) {
+    fetch("http://localhost:4000/projects")
+  .then(resp => resp.json())
+  .then(projects =>setProjects(projects))
+  }
 
   // # Deliverable 1: Configure a <button> in our App 
   // that will use json-server to fetch projects 
@@ -20,11 +30,11 @@ const App = () => {
   // returned by the response
 
   return (
-    <div className="App">
-      <Header />
+    <div className={classMode}>
+      <Header isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
       <ProjectForm />
-      <button>Load Projects</button>
-      <ProjectList projects={projects} />
+      <button onClick={handleClick}>Load Projects</button>
+      <ProjectList projects={projects} searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
     </div>
   );
 };
