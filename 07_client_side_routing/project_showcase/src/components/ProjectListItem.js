@@ -3,6 +3,7 @@
 
 import { useState } from "react";
 import { FaPencilAlt, FaTrash } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const ProjectListItem = ({
   project,
@@ -50,12 +51,16 @@ const ProjectListItem = ({
       <footer className="extra">
         <span className="badge blue">Phase {phase}</span>
         <div className="manage">
+          <Link to={`/projects/${id}/edit`}>
           <button onClick={handleEditClick}>
             <FaPencilAlt />
           </button>
+          </Link>
+          <Link>
           <button onClick={handleDeleteClick}>
             <FaTrash />
           </button>
+          </Link>
         </div>
       </footer>
     </li>
